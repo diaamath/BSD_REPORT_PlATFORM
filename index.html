@@ -1,0 +1,31 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>منصة النتائج - قسم العلوم الأساسية</title>
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="top">
+ <div class="brand">
+  <div class="logo"><img src="lib/logo.png" alt="" onerror="this.parentNode.classList.add('nologo');this.remove()"><span class="mark">جامعة<br>الملك سعود</span></div>
+  <div class="ttl"><h1>منصة النتائج- قسم العلوم الأساسية</h1><p>جامعة الملك سعود • عمادة السنة الأولى المشتركة • تحليل نتائج الاختبار الفصلي</p></div>
+ </div>
+ <span id="fn"></span>
+ <div class="tools"><select id="sx"></select><button class="p" onclick="print()">طباعة / حفظ PDF</button><button onclick="saveSum()">حفظ ملخص الفصل</button><label>ملخص فصل سابق <input type="file" id="pf" accept=".json"></label></div>
+</header>
+<main class="hero" id="hero"><div class="card">
+ <h2>إنشاء تقرير نتائج المقرر</h2>
+ <p>ارفع ملف درجات الطلاب (Excel) ليُبنى التقرير تلقائيًا في سبع صفحات جاهزة للطباعة والمقارنة مع الفصل السابق.</p>
+ <label class="drop" id="drop"><input type="file" id="f" accept=".xlsx,.xls,.csv"><b>اسحب ملف الإكسل هنا أو اضغط للاختيار</b><span>xlsx • xls • csv</span></label>
+ <ol class="steps"><li>ارفع ملف الإكسل الخاص بالفصل الحالي.</li><li>اختر القسم (الطالبات / الطلاب) وراجع الإعدادات عند الحاجة.</li><li>اضغط «طباعة / حفظ PDF» أو احفظ ملخص الفصل للمقارنة لاحقًا.</li></ol>
+</div></main>
+<details id="cfgbox"><summary>الإعدادات (تتغير في كل فصل)</summary><div class="g" id="cfg"></div></details>
+<div id="warn"></div><div id="out"></div>
+<div class="foot">جامعة الملك سعود — عمادة السنة الأولى المشتركة • قسم العلوم الأساسية</div>
+<script src="lib/xlsx.full.min.js"></script>
+<script src="settings.js"></script>
+<script src="engine.js"></script>
+<script src="render.js"></script>
+<script>
+(function(){const f=document.getElementById('f'),d=document.getElementById('drop');
+ f.addEventListener('change',()=>{if(f.files[0]){document.body.classList.add('loaded');document.getElementById('fn').textContent=f.files[0].name}});
+ ['dragover','dragenter'].forEach(e=>d.addEventListener(e,x=>{x.preventDefault();d.classList.add('on')}));
+ ['dragleave','drop'].forEach(e=>d.addEventListener(e,x=>{x.preventDefault();d.classList.remove('on')}));
+ d.addEventListener('drop',x=>{if(x.dataTransfer.files.length){f.files=x.dataTransfer.files;f.dispatchEvent(new Event('change'))}});})();
+</script>
+</body></html>
